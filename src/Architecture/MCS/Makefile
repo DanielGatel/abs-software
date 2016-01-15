@@ -19,7 +19,8 @@ clean: $(SUBCLEAN)
 
 $(OUT_HOST): $(EXE_HOST)
 	for exe in $(EXE_HOST); do ./$$exe; done;
-	for out in $(OUT_HOST); do cp $$out $(BIN_DIR)/Architecture/Include; done;
+	for out in $(OUT_HOST); do cp $$out $(INCLUDE_DIR_GEN); done;
+	for out in $(OUT_HOST); do cp $$out $(INCLUDE_DIR); done;
 
 $(EXE_HOST): $(OBJS_HOST)
 	$(HOST_CC) $^ -o $@ $(LOCAL_LDFLAGS_HOST)
@@ -40,4 +41,4 @@ $(SUBTEST): %.test:
 $(SUBCLEAN): %.clean:
 	$(MAKE) -C $* clean
 
-.PHONY: all clean test $(SUBDIRS) $(SUBCLEAN) $(SUBTEST) 
+.PHONY: all clean test $(SUBDIRS) $(SUBCLEAN) $(SUBTEST)

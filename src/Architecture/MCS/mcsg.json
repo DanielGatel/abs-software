@@ -1,72 +1,121 @@
 {
-"command_list" : [
-	{
-	"name" : "test",
-	"description" : "Send a test message",
-	"nargs" : 0,
-	"raw_data" : false,
-	"type" : "message",
-	"config" : {
-		"destination" : "@arg0",
-		"origin_groups" : ["any"],
-		"destination_groups" : ["any"],
-		"response_size" : 0
-		}
-	},
-	{
-	"name" : "sdb_handshake",
-	"description" : "Establish connection with the SDB",
-	"nargs" : 0,
-	"raw_data" : true,
-	"type" : "message",
-	"config" : {
-		"destination" : null,
-		"origin_groups" : ["any"],
-		"destination_groups" : [],
-		"response_size" : 0
-		}
-	},
-	{
-	"name" : "procman_start",
-	"description" : "Start the Process Manager",
-	"nargs" : 0,
-	"raw_data" : false,
-	"type" : "message",
-	"config" : {
-		"destination" : "procman",
-		"origin_groups" : ["syscore"],
-		"destination_groups" : [],
-		"response_size" : 0
-		}
-	},
-	{
-	"name" : "temperature_arduino",
-	"description" : "Get temperature from the embedded sensor in the Arduino board",
-	"nargs" : 1,
-	"raw_data" : false,
-	"type" : "state",
-	"config" : {
-		"update_function" : "get_sensor_value_arduino",
-		"dimensions" : 1,
-		"return_type" : "float",
-		"unit" : "K",
-		"dimension_name" : null,
-		"expire_group" : [{"app" : 15}]
-		}
-	},
-	{
-	"name" : "arduino_get_pin",
-	"description" : "Get the value of the given pin in the Arduino board",
-	"nargs" : 1,
-	"raw_data" : false,
-	"type" : "payload",
-	"config" : {
-		"command" : "001",
-		"parameters" : "0110",
-		"arguments" : "@arg0",
-		"data" : null,
-		"response_size" : 1
-		}
-	}
-]
+  "command_list": [{
+    "name": "test",
+    "description": "Send a test message",
+    "nargs": 0,
+    "raw_data": false,
+    "type": "message",
+    "config": {
+      "destination": "@arg0",
+      "origin_groups": ["any"],
+      "destination_groups": ["any"],
+      "response_size": 0
+    }
+  }, {
+    "name": "sdb_handshake",
+    "description": "Establish connection with the SDB",
+    "nargs": 0,
+    "raw_data": true,
+    "type": "message",
+    "config": {
+      "destination": null,
+      "origin_groups": ["any"],
+      "destination_groups": [],
+      "response_size": 0
+    }
+  }, {
+    "name": "procman_start",
+    "description": "Start the Process Manager",
+    "nargs": 0,
+    "raw_data": false,
+    "type": "message",
+    "config": {
+      "destination": "procman",
+      "origin_groups": ["syscore"],
+      "destination_groups": [],
+      "response_size": 0
+    }
+  }, {
+    "name": "temperature_arduino",
+    "description": "Get temperature from the embedded sensor in the Arduino board",
+    "nargs": 1,
+    "raw_data": false,
+    "type": "state",
+    "config": {
+      "update_function": "get_sensor_value_arduino",
+      "dimensions": 1,
+      "return_type": "float",
+      "unit": "K",
+      "dimension_name": null,
+      "expire_group": [{
+        "app": 15
+      }]
+    }
+
+  }, {
+    "name": "arduino_digital_write",
+    "description": "Set the value of the given pin in the Arduino board",
+    "nargs": 2,
+    "raw_data": false,
+    "type": "payload",
+    "config": {
+      "command": 1,
+      "parameters": 1,
+      "arguments": "@arg0",
+      "data": null,
+      "response_size": 1
+    }
+  }, {
+    "name": "arduino_digital_read",
+    "description": "Get the value of the given pin in the Arduino board",
+    "nargs": 1,
+    "raw_data": false,
+    "type": "payload",
+    "config": {
+      "command": 1,
+      "parameters": 3,
+      "arguments": "@arg0",
+      "data": null,
+      "response_size": 1
+    }
+  }, {
+    "name": "arduino_init_i2c",
+    "description": "Inicialice Arduino i2c",
+    "nargs": 2,
+    "raw_data": false,
+    "type": "payload",
+    "config": {
+      "command": 2,
+      "parameters": 0,
+      "arguments": "@arg0",
+      "data": null,
+      "response_size": 1
+    }
+  }, {
+    "name": "arduino_read_i2c",
+    "description": "Read Arduino i2c",
+    "nargs": 1,
+    "raw_data": false,
+    "type": "payload",
+    "config": {
+      "command": 2,
+      "parameters": 1,
+      "arguments": "@arg0",
+      "data": null,
+      "response_size": 1
+    }
+  }, {
+    "name": "arduino_write_i2c",
+    "description": "Write Arduino i2c",
+    "nargs": 2,
+    "raw_data": false,
+    "type": "payload",
+    "config": {
+      "command": 2,
+      "parameters": 2,
+      "arguments": "@arg0",
+      "data": null,
+      "response_size": 1
+    }
+  }]
 }
