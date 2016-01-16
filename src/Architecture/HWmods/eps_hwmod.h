@@ -64,10 +64,10 @@ enum ACDC_S_PGAGS { X1 = 0x0, //PGA Gain Selection
                     X4 = 0x2,
                     X8 = 0x3 };
 typedef struct ACDCconfig {
-    ACDC_S_CH channel;
-    ACDC_S_CM mode;
-    ACDC_S_SRS rate;
-    ACDC_S_PGAGS gain;
+    ACDC_S_CH channel = SC1;
+    ACDC_S_CM mode = CCM;
+    ACDC_S_SRS rate = SPS240B12;
+    ACDC_S_PGAGS gain = X1;
 } ACDCconfig;
 
 //static unsigned char acdc_init = 0x1;
