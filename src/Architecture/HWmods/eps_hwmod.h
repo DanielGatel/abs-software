@@ -73,7 +73,7 @@ enum ACDC_S_PGAGS { X1 = 0x0, //PGA Gain Selection
                     X4 = 0x2,
                     X8 = 0x3 };
 typedef struct ACDCconfig {//struct to define ACDC configuration
-    ACDC_S_CH channel;// = SC1;
+    ACDC_S_CH channel;// = SC1; //default valors
     ACDC_S_CM mode;// = CCM;
     ACDC_S_SRS rate;// = SPS240B12;
     ACDC_S_PGAGS gain;// = X1;
@@ -107,26 +107,50 @@ typedef struct ACDCdata { //Store ACDC data
 typedef struct POLdata {
     unsigned short ident;
     time_t t[N_EPS];
-
+//...
 } POLdata;
-
+//...
 /*Battery*/
 /*Batery - Files*/
-static char bchargefile[] = "/sys/class/power_supply/battery/state"; //File to change switch charge
-static char bfile_status[] = "/sys/class/power_supply/battery/state";
-static char bfile_present[] = "/sys/class/power_supply/battery/state";
-static char bfile_voltage[] = "/sys/class/power_supply/battery/voltage_now";
-static char bfile_temp[] = "/sys/class/power_supply/battery/state";
-static char bfile_capacity[] = "/sys/class/power_supply/battery/state";
-static char bfile_current[] = "/sys/class/power_supply/battery/current_now";
+static char bchargefile[] = "/sys/class/power_supply/battery/BT0"; //File to change switch charge
+static char bfile_info[] = "/sys/class/power_supply/battery/uevent";
+/*Batery - Info*/
+static char binfo_name[] = "POWER_SUPPLY_NAME";
+static char binfo_status[] = "POWER_SUPPLY_STATUS";
+static char binfo_health[] = "POWER_SUPPLY_HEALTH";
+static char binfo_present[] = "POWER_SUPPLY_PRESENT";
+static char binfo_technology[] = "POWER_SUPPLY_TECHNOLOGY";
+static char binfo_voltage_max_design[] = "POWER_SUPPLY_VOLTAGE_MAX_DESIGN";
+static char binfo_voltage_min_design[] = "POWER_SUPPLY_VOLTAGE_MIN_DESIGN";
+static char binfo_voltage_now[] = "POWER_SUPPLY_VOLTAGE_NOW";
+static char binfo_temp[] = "POWER_SUPPLY_TEMP";
+static char binfo_capacity[] = "POWER_SUPPLY_CAPACITY";
+static char binfo_current_now[] = "POWER_SUPPLY_CURRENT_NOW";
+static char binfo_charge_full_design[] = "POWER_SUPPLY_CHARGE_FULL_DESIGN";
+
 /*Battery - Data*/
 typedef struct BATdata {
     time_t t;
     bool charging;
-    int level;
+    int status;
     int voltage;
     int current;
+    int temp;
 
 } BATdata;
+/*Battery - Data*/
+#define B_SUL 90 //Battery status up limit
+#define B_SDL 80 //Battery status down limit
+#define B_SCL 20 //Battery status critic limit
+#define B_SCH 30 //Battery status critic histeresi limit
+
+/*Main functions*/
+void check ( );
+void init ( );
+void run ( );
+void check ( );
+/*OSF*/
+void osf_eps_get_data(EPSComponent comp); //Request data of component comp
+
 
 #endif
